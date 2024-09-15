@@ -27,10 +27,6 @@ volatile bool zeroCrossDetected = false;
 volatile unsigned long lastZeroCrossTime = 0;
 
 
-// Setpoint temperature for each heater
-float setpoint1; // Example setpoint for heater 1
-float setpoint2; // Example setpoint for heater 2
-
 MAX6675 thermocouple_1(thermoCLK, thermoCS_T1, thermoDO);
 MAX6675 thermocouple_2(thermoCLK, thermoCS_T2, thermoDO);
 
@@ -252,8 +248,6 @@ void setup()
 {
     Serial.begin( 115200 ); /* prepare for possible serial debug */
 
-    String LVGL_Arduino = "Hello! ";
-    LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
 
     lv_init();
 
