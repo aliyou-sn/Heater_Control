@@ -135,19 +135,11 @@ void adjustTriac(int triacPin, float currentTemp, float setpointTemp) {
 void GetTemp(void *parameter){
   for(;;)
   {
-  
 
-  GrillTemperatureC = random(120,150);  //random values for testing
-  WarmerTemperatureC = random(70,75);  //random values for testing
-  //for Fahrenheit conversion
-  GrillTemperatureF = (0.5556*GrillTemperatureC) + 32;
-  WarmerTemperatureF = (0.5556*WarmerTemperatureC) + 32;
-
-
-  // GrillTemperatureC = thermocouple_1.readCelsius();
-  // WarmerTemperatureC = thermocouple_2.readCelsius();
-  // GrillTemperatureF = thermocouple_1.readFahrenheit();
-  // WarmerTemperatureF = thermocouple_2.readFahrenheit();
+  GrillTemperatureC = thermocouple_1.readCelsius();
+  WarmerTemperatureC = thermocouple_2.readCelsius();
+  GrillTemperatureF = thermocouple_1.readFahrenheit();
+  WarmerTemperatureF = thermocouple_2.readFahrenheit();
 
   char buf1[_UI_TEMPORARY_STRING_BUFFER_SIZE];
   char buf2[_UI_TEMPORARY_STRING_BUFFER_SIZE];
@@ -295,6 +287,8 @@ void setup()
     pinMode(Grill, OUTPUT);
     pinMode(Warmer, OUTPUT);
     pinMode(zeroCrossPin, INPUT_PULLUP);
+    pinMode(triac1Pin, OUTPUT);
+    pinMode(triac2Pin, OUTPUT);
 
     // Attach zero-crossing interrupt
     attachInterrupt(digitalPinToInterrupt(zeroCrossPin), zeroCrossISR, FALLING);
